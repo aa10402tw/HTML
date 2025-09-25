@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFC 13Y 沖繩四日遊行程總覽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Coastal Calm -->
+    <!-- Application Structure Plan: A single-page vertical scrolling application with a sticky navigation bar for quick access to each day's itinerary. This structure is intuitive for a chronological plan. Each day is a separate section with events displayed as interactive cards. Cards for meals and lodging feature clickable tabs to switch between different options, reducing clutter and allowing for easy comparison. An overview section at the top summarizes key trip info and includes a budget chart for a quick visual summary. This design prioritizes clarity, ease of navigation, and interactive exploration over a static list. -->
+    <!-- Visualization & Content Choices: Report Info: Trip schedule -> Goal: Organize/Inform -> Viz/Presentation: Interactive timeline cards with icons -> Interaction: Clickable tabs for options (e.g., dinner choices) to show/hide details -> Justification: Cleans UI, simplifies decision-making. Report Info: Budget (hypothetical) -> Goal: Inform -> Viz: Doughnut Chart -> Interaction: Hover for tooltips -> Justification: Provides a quick, high-level financial overview -> Library: Chart.js/Canvas. All location links are made interactive. This structure makes a text-heavy itinerary scannable and engaging. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #F8F7F4;
+            color: #3D405B;
+        }
+        .nav-link {
+            transition: all 0.3s;
+        }
+        .nav-link.active {
+            color: #E07A5F;
+            border-bottom: 2px solid #E07A5F;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: -1.05rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background-color: #81B29A;
+        }
+        .timeline-icon {
+            position: absolute;
+            left: -2rem;
+            top: 1.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #81B29A;
+            color: white;
+            z-index: 10;
+        }
+        .option-tab {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .option-tab.active {
+            background-color: #81B29A;
+            color: white;
+            border-color: #81B29A;
+        }
+        .option-tab:not(.active) {
+             background-color: #F4F1DE;
+             color: #3D405B;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex flex-col">
+                    <h1 class="text-2xl md:text-3xl font-bold text-[#3D405B]">TFC 13Y 沖繩之旅</h1>
+                    <p class="text-sm text-gray-500">四天三夜，十人同行，一場難忘的冒險</p>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">總覽</a>
+                    <a href="#day1" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 1</a>
+                    <a href="#day2" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 2</a>
+                    <a href="#day3" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 3</a>
+                    <a href="#day4" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 4</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="md:hidden bg-white/80 backdrop-blur-lg shadow-sm sticky top-[76px] z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-around py-2">
+                <a href="#overview" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F]">總覽</a>
+                <a href="#day1" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F]">Day 1</a>
+                <a href="#day2" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F]">Day 2</a>
+                <a href="#day3" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F]">Day 3</a>
+                <a href="#day4" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F]">Day 4</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <section id="overview" class="scroll-mt-32 mb-16">
+            <h2 class="text-3xl font-bold text-[#E07A5F] border-b-2 border-[#F2CC8F] pb-2 mb-6">行程總覽</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-[#3D405B]">重要資訊</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-4">✈️</span>
+                            <div>
+                                <h4 class="font-semibold">航班資訊</h4>
+                                <p class="text-gray-600">桃園 (TPE) ⇄ 沖繩那霸 (OKA)</p>
+                                <p class="text-sm text-gray-500">10/23 出發: 06:50 - 09:20 | 10/26 返程: 16:55 - 17:35</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start">
+                            <span class="text-2xl mr-4">🚗</span>
+                            <div>
+                                <h4 class="font-semibold">租車資訊</h4>
+                                <p class="text-gray-600">沖繩OTS租車 (文宇已預訂)</p>
+                                <p class="text-sm text-gray-500">10/23 10:00 至 10/26 14:00</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-4">👥</span>
+                            <div>
+                                <h4 class="font-semibold">同行旅伴 (10人)</h4>
+                                <p class="text-gray-600">行李託運：冠聞、韋智、1+、朱朱</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center">
+                    <h3 class="text-xl font-bold mb-4 text-[#3D405B]">預算參考（日圓）</h3>
+                    <div class="chart-container">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <div id="itinerary"></div>
+
+    </main>
+    
+    <script>
+        const itineraryData = {
+            day1: {
+                title: "北部探索之旅",
+                date: "10/23 (週四)",
+                events: [
+                    { time: "06:50 - 09:20", title: "出發", icon: "✈️", description: "桃園機場 → 抵達沖繩那霸機場", notes: "記得檢查護照與機票！ 需要託運的有：冠聞、韋智、1+、朱朱。" },
+                    { time: "09:30 - 11:30", title: "機場手續 & 租車", icon: "🚗", description: "領取行李、租車。", notes: "沖繩OTS租車 (10/23 10:00~10/26 14:00)，文宇已預訂。" },
+                    { time: "11:30 - 14:00", title: "午餐 & 交通", icon: "🍽️", description: "前往系滿魚市場享用午餐，隨後驅車前往沖繩北部。", notes: "車程約 1 小時 10 分鐘。午餐備案：蝦蝦飯 (無法預約)。<br><a href='https://hanblog.tw/itoman-fish-center/' target='_blank' class='text-[#E07A5F] hover:underline'>系滿魚市場介紹</a>" },
+                    { time: "14:00 - 17:00", title: "景點遊覽", icon: "🏞️", description: "古宇利島周邊，包含南北觀景台與海景咖啡廳。", notes: "下午茶：<a href='https://slowlifeinokinawa.com/okicafe-fifiparlor/' target='_blank' class='text-[#E07A5F] hover:underline'>FIFI PARLOR</a>" },
+                    { 
+                        time: "18:00 - 19:00", title: "晚餐時間", icon: "🥘", description: "晚餐有多個選擇，請點選下方按鈕查看。", 
+                        options: {
+                            '百年古家 大家': { name: "百年古家 大家 (阿古豬)", link: "https://www.tablecheck.com/shops/ufuya/reserve", note: "預約時段 17:30/18:00/19:30，需確認預約狀況。" },
+                            'CHABU 名護店': { name: "CHABU 名護店", link: "https://okinawa.letsgojp.com/archives/757651/", note: "" },
+                            '鳴声以外': { name: "うちなー食道 鳴声以外", link: "https://r.gnavi.co.jp/plan/sbv47hku0000/plan-reserve/inquiry/input/form/?sc_cid=gorp_header_reserve#", note: "離水族館10分鐘。" }
+                        } 
+                    },
+                    { 
+                        time: "19:00 -", title: "入住 & 自由時間", icon: "🏨", description: "入住飯店後為自由時間。", 
+                        options: {
+                            'Four Season': { name: "Four Season Resort Kouri Island", link: "https://www.agoda.com/zh-hk/l/hotel/iheya-jp.html?checkIn=2025-10-23&los=1&Rooms=1&Adults=10&Childs=0&currency=TWD&origin=TW&cid=1922876", note: "10/18前可免費取消。" },
+                            'Mon Refuge': { name: "Mon Refuge Prive", link: "https://www.booking.com/hotel/jp/mon-refuge-prive-si-noyin-rejia.zh-tw.html?aid=2311236", note: "靠近水族館，10/9前可免費取消。" }
+                        },
+                        notes: "晚上活動：旅館玩遊戲，贏家隔天燒肉免費任點 (10000日圓內)。"
+                    },
+                    { time: "宵夜/酒吧", title: "夜生活", icon: "🍻", description: "可選擇前往居酒屋或酒吧。", notes: "居酒屋參考：<a href='https://maps.app.goo.gl/1PAx4h3yWZLeJ5Ju6' target='_blank' class='text-[#E07A5F] hover:underline'>豚と寿司の島居酒屋</a>" }
+                ]
+            },
+            day2: {
+                title: "海洋與美食之旅",
+                date: "10/24 (週五)",
+                events: [
+                    { time: "08:30 - 12:00", title: "美麗海水族館", icon: "🐠", description: "探索神秘的海底世界。", notes: "必看：10:00-10:30 餵食海豚海龜；10:30/11:30 海豚秀。" },
+                    { 
+                        time: "12:00 - 14:00", title: "午餐時間", icon: "🍜", description: "水族館周邊有多樣化的午餐選擇。", 
+                        options: {
+                            '海邦丸': { name: "海人料理 海邦丸 (海鮮定食)", link: "https://www.google.com/maps/place/%E6%B5%B7%E4%BA%BA%E6%96%99%E7%90%86+%E6%B5%B7%E9%82%A6%E4%B8%B8/@26.6875317,127.8745423,15.75z/data=!4m22!1m15!4m14!1m6!1m2!1s0x34e4fa3152619e3d:0xea08a6700fdd9ffe!2z5rKW57mp576O6bqX5rW35rC05peP6aSoIOaXpeacrOOAkjkwNS0wMjA2IE9raW5hd2EsIEt1bmlnYW1pIERpc3RyaWN0LCBNb3RvYnUsIElzaGlrYXdhLCA0MjQ!2m2!1d127.8780131!2d26.694338!1m6!1m2!1s0x34e4fbd207cf9a83:0x5e5c187da072999b!2z5rW35Lq65paZ55CGIOa1t-mCpuS4uCDml6XmnKzjgJI5MDUtMDIwNSBPa2luYXdhLCBLdW5pZ2FtaSBEaXN0cmljdCwgTW90b2J1LCBZYW1hZ2F3YSwgMTQyMS0x!2m2!1d127.8836417!2d26.682195!3m5!1s0x34e4fbd207cf9a83:0x5e5c187da072999b!8m2!3d26.682195!4d127.8836417!16s%2Fg%2F1td0w6nl", note: "" },
+                            '岸本食堂': { name: "岸本食堂 (百年沖繩麵)", link: "https://www.google.com/maps/place/%E5%B2%B8%E6%9C%AC%E9%A3%9F%E5%A0%82/@26.6761861,127.8660123,14z/data=!4m23!1m15!4m14!1m6!1m2!1s0x34e4fa3152619e3d:0xea08a6700fdd9ffe!2z5rKW57mp576O6bqX5rW35rC05peP6aSoIOaXpeacrOOAkjkwNS0wMjA2IE9raW5hd2EsIEt1bmlnYW1pIERpc3RyaWN0LCBNb3RvYnUsIElzaGlrYXdhLCA0MjQ!2m2!1d127.8780131!2d26.694338!1m6!1m2!1s0x34e4f95eb431867d:0x1653b48af7640a31!2z5bK45pys6aOf5aCCIOaXpeacrOOAkjkwNS0wMjE0IE9raW5hd2EsIEt1bmlnYW1pIERpc3RyaWN0LCBNb3RvYnUsIOacrOmDqOeUulRvZ3VjaGksIDU!2m2!1d127.8958949!2d26.6603253!3m6!1s0x34e4f95eb431867d:0x1653b48af7640a31!8m2!3d26.6603253!4d127.8958949!10e9!16s%2Fg%2F1tfn0h3y", note: "" },
+                            '島豚家': { name: "島豚家 (限量炙烤島豬麵)", link: "https://www.google.com/maps/place/Island+Pig+House/@26.6900872,127.8785653,15.75z/data=!3m1!5s0x34e4fa331411ea83:0xa075f02c5f1d5747!4m23!1m15!4m14!1m6!1m2!1s0x34e4fa3152619e3d:0xea08a6700fdd9ffe!2z5rKW57mp576O6bqX5rW35rC05peP6aSoIOaXpeacrOOAkjkwNS0wMjA2IE9raW5hd2EsIEt1bmlnYW1pIERpc3RyaWN0LCBNb3RvYnUsIElzaGlrYXdhLCA0MjQ!2m2!1d127.8780131!2d26.694338!1m6!1m2!1s0x34e4f95cc7f9bf7f:0xb37a97d151c8e3c0!2zSXNsYW5kIFBpZyBIb3VzZSwgNDc555Wq5ZywIFRveW9oYXJhLCBNb3RvYnUsIEt1bmlnYW1pIERpc3RyaWN0LCBPa2luYXdhIDkwNS0wMjA05pel5pys!2m2!1d127.8921072!2d26.6901511!3m6!1s0x34e4f95cc7f9bf7f:0xb37a97d151c8e3c0!8m2!3d26.6901511!4d127.8921072!10e9!16s%2Fg%2F1tj875cl", note: "每日限量50碗。" }
+                        }
+                    },
+                    { time: "下午", title: "中部景點遊覽", icon: "🗺️", description: "行程待定，可彈性安排。", notes: "" },
+                    { time: "晚上", title: "晚餐：燒肉！", icon: "🥩", description: "琉球の牛 恩納店，已分批預約。", notes: "預計 20:00。預約碼：9A77JL, ECST64, YDFWSK。<br><a href='https://www.u-shi.net/onna.html' target='_blank' class='text-[#E07A5F] hover:underline'>官方網站</a>" },
+                    { 
+                        time: "晚上", title: "入住 & 休息", icon: "🏡", description: "入住中部地區的住宿。", 
+                        options: {
+                            '白C': { name: "白C (Airbnb)", link: "https://www.airbnb.com.tw/rooms/846846699079461432", note: "10人, 17,000$, 22點後需降低音量。" },
+                            'TERRACE': { name: "TERRACE GARDEN OKINAWA", link: "https://www.agoda.com/terrace-garden-okinawa-h10943499/hotel/okinawa-main-island-jp.html", note: "9/12前可免費取消。" }
+                        }
+                    }
+                ]
+            },
+            day3: {
+                title: "動感與悠閒之旅",
+                date: "10/25 (週六)",
+                events: [
+                    { time: "上午", title: "水上活動：浮潛", icon: "🤿", description: "前往沖繩藍 (青之洞窟) 體驗浮潛。", notes: "時間：08:00 - 10:00，文宇已預訂。" },
+                    { time: "中午", title: "午餐時間", icon: "🍽️", description: "地點待定，可依據浮潛後的地點決定。", notes: "" },
+                    { time: "下午", title: "南部景點遊覽", icon: "🏛️", description: "行程待定，可彈性安排。", notes: "" },
+                    { time: "晚上", title: "市區探索：國際通", icon: "🛍️", description: "自由活動，晚餐可在此解決。", notes: "晚餐選項：<a href='https://autoreserve.com/zh-hk/restaurants/W2w2Ro8TcnG5hVNxXw4P' target='_blank' class='text-[#E07A5F] hover:underline'>肉的變態集團</a> (可預約 17:00 / 20:00)。<br>點心：blue sea 冰店。可考慮逛美國村。" },
+                    { time: "晚上", title: "入住 & 休息", icon: "🏨", description: "Naha Miharanosato -SEVEN Hotels and Resorts", notes: "10/11前可免費取消。<br><a href='https://www.agoda.com/zh-tw/naha-miharanosato-seven-hotels-and-resorts/hotel/okinawa-main-island-jp.html' target='_blank' class='text-[#E07A5F] hover:underline'>訂房連結</a>" }
+                ]
+            },
+            day4: {
+                title: "購物與歸途",
+                date: "10/26 (週日)",
+                events: [
+                    { time: "早上", title: "最後巡禮", icon: "🏝️", description: "可選擇前往瀨長島或在國際通繼續購物。", notes: "瀨長島假日可能容易塞車，需注意交通時間。" },
+                    { time: "中午", title: "午餐 & 逛街", icon: "🎁", description: "在國際通享用午餐並進行最後的採購。", notes: "" },
+                    { time: "下午", title: "前往機場", icon: "🚗", description: "準備還車並辦理登機手續。", notes: "記得預留充足時間。" },
+                    { time: "16:55 - 17:35", title: "返程", icon: "✈️", description: "沖繩那霸機場 → 抵達桃園國際機場", notes: "滿載而歸！" }
+                ]
+            }
+        };
+
+        const itineraryContainer = document.getElementById('itinerary');
+        Object.keys(itineraryData).forEach(dayKey => {
+            const dayData = itineraryData[dayKey];
+            const section = document.createElement('section');
+            section.id = dayKey;
+            section.className = "scroll-mt-32 mb-12";
+            
+            let eventsHtml = '';
+            dayData.events.forEach((event, index) => {
+                let optionsHtml = '';
+                if (event.options) {
+                    const optionKeys = Object.keys(event.options);
+                    const tabsHtml = optionKeys.map((key, i) => `<button class="option-tab ${i === 0 ? 'active' : ''}" data-target="${dayKey}-event${index}-option${i}">${key}</button>`).join('');
+                    const contentsHtml = optionKeys.map((key, i) => {
+                        const option = event.options[key];
+                        return `<div id="${dayKey}-event${index}-option${i}" class="option-content ${i > 0 ? 'hidden' : ''} mt-4 p-4 bg-gray-50 rounded-lg">
+                                    <h5 class="font-semibold">${option.name}</h5>
+                                    ${option.note ? `<p class="text-sm text-gray-600 mt-1">${option.note}</p>` : ''}
+                                    ${option.link ? `<a href="${option.link}" target="_blank" class="text-sm text-[#E07A5F] hover:underline mt-2 inline-block">查看詳情 &rarr;</a>` : ''}
+                                </div>`;
+                    }).join('');
+                    optionsHtml = `<div class="mt-4">
+                                     <div class="flex flex-wrap gap-2">${tabsHtml}</div>
+                                     <div>${contentsHtml}</div>
+                                 </div>`;
+                }
+                
+                eventsHtml += `
+                    <div class="timeline-item relative pl-8 pb-8">
+                        <div class="timeline-icon text-xl">${event.icon}</div>
+                        <p class="text-sm font-medium text-[#E07A5F]">${event.time}</p>
+                        <h4 class="text-xl font-bold mt-1 text-[#3D405B]">${event.title}</h4>
+                        <p class="text-gray-700 mt-2">${event.description}</p>
+                        ${event.notes ? `<div class="mt-2 text-sm text-gray-500 bg-[#F4F1DE]/60 p-3 rounded-md">${event.notes}</div>` : ''}
+                        ${optionsHtml}
+                    </div>
+                `;
+            });
+
+            section.innerHTML = `
+                <div class="flex items-baseline mb-6">
+                     <h2 class="text-3xl font-bold text-[#E07A5F] mr-4">Day ${dayKey.slice(-1)}</h2>
+                     <p class="text-xl font-medium text-gray-500">${dayData.date} - ${dayData.title}</p>
+                </div>
+                <div class="relative">${eventsHtml}</div>
+            `;
+            itineraryContainer.appendChild(section);
+        });
+
+        itineraryContainer.addEventListener('click', function(e) {
+            if (e.target.classList.contains('option-tab')) {
+                const targetId = e.target.dataset.target;
+                
+                const parent = e.target.closest('.timeline-item');
+                parent.querySelectorAll('.option-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+
+                parent.querySelectorAll('.option-content').forEach(content => content.classList.add('hidden'));
+                document.getElementById(targetId).classList.remove('hidden');
+            }
+        });
+        
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: "-50% 0px -50% 0px" });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector(link.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        const ctx = document.getElementById('budgetChart').getContext('2d');
+        const budgetChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['住宿', '交通', '餐飲', '活動 & 門票', '購物 & 其他'],
+                datasets: [{
+                    label: '預算分配',
+                    data: [35000, 25000, 20000, 15000, 10000],
+                    backgroundColor: [
+                        '#3D405B',
+                        '#81B29A',
+                        '#E07A5F',
+                        '#F2CC8F',
+                        '#F4F1DE'
+                    ],
+                    borderColor: '#F8F7F4',
+                    borderWidth: 4,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                family: "'Inter', 'Noto Sans TC', sans-serif"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+    </script>
+</body>
+</html>
