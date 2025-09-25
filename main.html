@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFC 13Y 沖繩之旅</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f0f9ff; /* Light sky background */
+        }
+        /* Custom styles for the timeline */
+        .timeline-item .timeline-icon {
+            background-color: #e0f2fe; /* Lighter sky */
+            color: #0ea5e9; /* Sky blue */
+        }
+        .timeline-item .timeline-content {
+            border-left: 3px solid #e0f2fe;
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+        <!-- Header -->
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-sky-600">TFC 13Y 沖繩之旅</h1>
+            <p class="text-slate-500 mt-3 text-lg">2025/10/23 (四) - 2025/10/26 (日)</p>
+        </header>
+
+        <!-- Trip Overview Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 text-center">行程總覽</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Flight Info -->
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:-translate-y-1">
+                    <div class="bg-sky-100 p-3 rounded-full mb-4">
+                        <svg class="w-8 h-8 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">飛行資訊</h3>
+                    <p class="text-slate-600 text-sm">去程: 台灣虎航 IT230<br>10/23 (四) 06:50 - 09:20</p>
+                    <hr class="w-1/2 my-3 border-slate-200">
+                    <p class="text-slate-600 text-sm">回程: 亞洲航空 FD231<br>10/26 (日) 16:55 - 17:25</p>
+                </div>
+                <!-- Car Rental -->
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:-translate-y-1">
+                    <div class="bg-sky-100 p-3 rounded-full mb-4">
+                        <svg class="w-8 h-8 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V14.25m-17.25 4.5v-1.875a3.375 3.375 0 003.375-3.375h1.5a1.125 1.125 0 011.125 1.125v-1.5a3.375 3.375 0 00-3.375-3.375H3.375m15.75 9V14.25A3.375 3.375 0 0015.75 10.5h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 003.375-3.375h1.5A3.375 3.375 0 0121 10.875v1.875m-15.75 9a3.375 3.375 0 003.375-3.375H6.75a3.375 3.375 0 003.375 3.375m-3.375 0V10.5A3.375 3.375 0 016.75 7.125h1.5a3.375 3.375 0 013.375 3.375v1.5m0 0a3.375 3.375 0 003.375 3.375h1.5a3.375 3.375 0 003.375-3.375m-3.375 0V7.125A3.375 3.375 0 0113.5 3.75h1.5a3.375 3.375 0 013.375 3.375v1.5" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">租車資訊</h3>
+                    <p class="text-slate-600 text-sm">租車公司: OTS 租車<br>取車地點: 那霸機場營業所<br>預計還車: 10/26 (日) 14:00</p>
+                </div>
+                <!-- Accommodation -->
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform transform hover:-translate-y-1">
+                    <div class="bg-sky-100 p-3 rounded-full mb-4">
+                        <svg class="w-8 h-8 text-sky-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m-3-1l-3-1m-3 1l-3-1m6 2l-3-1m-3 1l-3-1M18 7.5l-3 1m-3-1l-3 1m-6-3l3 1m6-3l3 1" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">住宿資訊</h3>
+                    <p class="text-slate-600 text-sm">Day 1: 古宇利島 Villa<br>Day 2: 恩納包棟民宿<br>Day 3: 國際通附近飯店</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Itinerary Section -->
+        <section>
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 text-center">每日行程</h2>
+            
+            <!-- Day 1 -->
+            <article class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold text-sky-600 mb-6">Day 1 (10/23 四): 啟程向北，馳騁古宇利</h3>
+                <div class="timeline">
+                    <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                            <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">06:50 - 09:20</p>
+                            <p class="text-slate-600">搭乘台灣虎航 IT230 前往沖繩，抵達那霸機場。</p>
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                             <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 3a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m15-3V6a2.25 2.25 0 00-2.25-2.25H9.388c-.383 0-.75.126-1.057.368L4.5 6.5m15 0v.75" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">09:20 - 11:30</p>
+                            <p class="text-slate-600">領取行李、辦理 OTS 租車，直奔<strong class="font-semibold text-sky-700">系滿魚市場</strong>享用午餐。</p>
+                        </div>
+                    </div>
+                     <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                             <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.5-12.75a.75.75 0 01.75.75v14.25a.75.75 0 01-1.5 0V4.5a.75.75 0 01.75-.75z" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">11:30 - 17:00</p>
+                            <p class="text-slate-600">驅車向北，品嚐<strong class="font-semibold text-sky-700">蝦蝦飯</strong>，遊覽<strong class="font-semibold text-sky-700">古宇利島</strong>，在海景咖啡廳 FIFI PARLOR 享受悠閒。</p>
+                        </div>
+                    </div>
+                     <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                             <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">18:00 - </p>
+                            <p class="text-slate-600">晚餐享用<strong class="font-semibold text-sky-700">「うちなー食道 鳴声以外」</strong>，餐後入住 Villa 舉辦遊戲王大賽！</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Day 2 -->
+             <article class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold text-sky-600 mb-6">Day 2 (10/24 五): 海洋奇觀與極品燒肉</h3>
+                <div class="timeline">
+                    <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                            <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                               <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path d="M12.472 3.493a2.25 2.25 0 013.056 0l5.25 5.25a2.25 2.25 0 010 3.056l-5.25 5.25a2.25 2.25 0 01-3.056 0l-5.25-5.25a2.25 2.25 0 010-3.056l5.25-5.25z" /><path d="M16.5 7.5L9 15" /><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">08:30 - 12:00</p>
+                            <p class="text-slate-600">參觀<strong class="font-semibold text-sky-700">美麗海水族館</strong>，觀賞鯨鯊、鬼蝠魟與海豚表演。</p>
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                             <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.562L16.25 22l-.648-1.437a3.375 3.375 0 00-2.456-2.456L11.75 18l1.438-.648a3.375 3.375 0 002.456-2.456L16.25 13l.648 1.437a3.375 3.375 0 002.456 2.456L20.75 18l-1.438.648a3.375 3.375 0 00-2.456 2.456z" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">12:00 - 14:00</p>
+                            <p class="text-slate-600">午餐選擇<strong class="font-semibold text-sky-700">海人料理 海邦丸</strong>或<strong class="font-semibold text-sky-700">岸本食堂</strong>。</p>
+                        </div>
+                    </div>
+                     <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                             <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664l.143.258a1.125 1.125 0 01-.11 1.585l-.64.64a1.125 1.125 0 01-1.586-.11l-.258-.143a1.107 1.107 0 00-1.664.57l-.048.143a2.25 2.25 0 01-.886 1.161l-.766.51a1.01 1.01 0 01-1.49-.216l-.89-1.068a1.125 1.125 0 00-.864-.405v-.568c0-.334-.148-.65-.405-.864l-1.068-.89a1.01 1.01 0 01-.216-1.49l.51-.766a2.25 2.25 0 011.161-.886l.143-.048a1.107 1.107 0 00.57-1.664l-.143-.258a1.125 1.125 0 01.11-1.585l.64-.64a1.125 1.125 0 011.586.11l.258.143a1.107 1.107 0 001.664-.57l.048-.143a2.25 2.25 0 01.886-1.161l.766-.51a1.01 1.01 0 011.49.216l.89 1.068c.257.214.405.53.405.864z" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">20:00 - </p>
+                            <p class="text-slate-600">晚餐重頭戲：<strong class="font-semibold text-sky-700">燒肉 琉球の牛 (恩納店)</strong>，餐後入住恩納民宿。</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+             <!-- Day 3 -->
+             <article class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold text-sky-600 mb-6">Day 3 (10/25 六): 潛入蔚藍與不夜城探險</h3>
+                <div class="timeline">
+                    <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                            <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                               <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">08:00 - 10:00</p>
+                            <p class="text-slate-600">參加<strong class="font-semibold text-sky-700">沖繩藍 (青之洞窟)</strong> 潛水行程，體驗夢幻藍光。</p>
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                             <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.658-.463 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">晚上</p>
+                            <p class="text-slate-600">前進那霸市區，晚餐<strong class="font-semibold text-sky-700">「肉的變態集團」</strong>，之後<strong class="font-semibold text-sky-700">國際通</strong>、<strong class="font-semibold text-sky-700">美國村</strong>自由活動。</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Day 4 -->
+            <article class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-sky-600 mb-6">Day 4 (10/26 日): 最後巡禮，滿載而歸</h3>
+                <div class="timeline">
+                    <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                            <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                               <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">上午</p>
+                            <p class="text-slate-600">前往「小希臘」<strong class="font-semibold text-sky-700">瀨長島 Umikaji Terrace</strong>，享受最後的度假氛圍。</p>
+                        </div>
+                    </div>
+                    <!-- Item -->
+                    <div class="timeline-item flex mb-6">
+                        <div class="flex flex-col items-center mr-4">
+                             <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.328 1.095-.828l2.916-6.623c.243-.552-.145-1.176-.745-1.176H5.198M9 18a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm9 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">中午</p>
+                            <p class="text-slate-600">回到<strong class="font-semibold text-sky-700">國際通</strong>進行最後採購並享用午餐。</p>
+                        </div>
+                    </div>
+                     <!-- Item -->
+                    <div class="timeline-item flex">
+                        <div class="flex flex-col items-center mr-4">
+                             <div class="timeline-icon w-10 h-10 rounded-full flex items-center justify-center z-10">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
+                            </div>
+                        </div>
+                        <div class="timeline-content pl-4 flex-1">
+                            <p class="font-bold text-slate-800">14:00 - 16:55</p>
+                            <p class="text-slate-600">還車後前往機場，準備搭乘亞洲航空 FD231 返回台灣。</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+    </div>
+
+</body>
+</html>
+
