@@ -28,17 +28,17 @@
             content: '';
             position: absolute;
             top: 2rem;
-            left: -1.05rem;
+            left: -0.8rem; /* Mobile */
             width: 2px;
             height: calc(100% - 1rem);
             background-color: #81B29A;
         }
         .timeline-icon {
             position: absolute;
-            left: -2rem;
+            left: -1.5rem; /* Mobile */
             top: 1.5rem;
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 2rem; /* Mobile */
+            height: 2rem; /* Mobile */
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -71,6 +71,16 @@
             margin-right: auto;
             height: 300px;
             max-height: 400px;
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .timeline-item::before {
+                left: -1.05rem;
+            }
+            .timeline-icon {
+                left: -2rem;
+                width: 2.5rem;
+                height: 2.5rem;
+            }
         }
         @media (min-width: 768px) {
             .chart-container {
@@ -114,7 +124,7 @@
     <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
         <section id="overview" class="scroll-mt-32 mb-16">
-            <h2 class="text-3xl font-bold text-[#E07A5F] border-b-2 border-[#F2CC8F] pb-2 mb-6">行程總覽</h2>
+            <h2 class="text-2xl sm:text-3xl font-bold text-[#E07A5F] border-b-2 border-[#F2CC8F] pb-2 mb-6">行程總覽</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="bg-white p-6 rounded-xl shadow-lg">
                     <h3 class="text-xl font-bold mb-4 text-[#3D405B]">重要資訊</h3>
@@ -261,10 +271,10 @@
                 }
                 
                 eventsHtml += `
-                    <div class="timeline-item relative pl-8 pb-8">
-                        <div class="timeline-icon text-xl">${event.icon}</div>
+                    <div class="timeline-item relative pl-6 sm:pl-8 pb-8">
+                        <div class="timeline-icon text-base sm:text-xl">${event.icon}</div>
                         <p class="text-sm font-medium text-[#E07A5F]">${event.time}</p>
-                        <h4 class="text-xl font-bold mt-1 text-[#3D405B]">${event.title}</h4>
+                        <h4 class="text-lg sm:text-xl font-bold mt-1 text-[#3D405B]">${event.title}</h4>
                         <p class="text-gray-700 mt-2">${event.description}</p>
                         ${event.notes ? `<div class="mt-2 text-sm text-gray-500 bg-[#F4F1DE]/60 p-3 rounded-md">${event.notes}</div>` : ''}
                         ${optionsHtml}
@@ -274,8 +284,8 @@
 
             section.innerHTML = `
                 <div class="flex items-baseline mb-6">
-                     <h2 class="text-3xl font-bold text-[#E07A5F] mr-4">Day ${dayKey.slice(-1)}</h2>
-                     <p class="text-xl font-medium text-gray-500">${dayData.date} - ${dayData.title}</p>
+                     <h2 class="text-2xl sm:text-3xl font-bold text-[#E07A5F] mr-4">Day ${dayKey.slice(-1)}</h2>
+                     <p class="text-lg sm:text-xl font-medium text-gray-500">${dayData.date} - ${dayData.title}</p>
                 </div>
                 <div class="relative">${eventsHtml}</div>
             `;
@@ -378,3 +388,4 @@
     </script>
 </body>
 </html>
+
