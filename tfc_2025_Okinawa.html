@@ -7,10 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Coastal Calm -->
-    <!-- Application Structure Plan: A single-page vertical scrolling application with a sticky navigation bar for quick access to each day's itinerary. This structure is intuitive for a chronological plan. Each day is a separate section with events displayed as interactive cards. Cards for meals and lodging feature clickable tabs to switch between different options, reducing clutter and allowing for easy comparison. An overview section at the top summarizes key trip info and includes a budget chart for a quick visual summary. This design prioritizes clarity, ease of navigation, and interactive exploration over a static list. -->
-    <!-- Visualization & Content Choices: Report Info: Trip schedule -> Goal: Organize/Inform -> Viz/Presentation: Interactive timeline cards with icons -> Interaction: Clickable tabs for options (e.g., dinner choices) to show/hide details -> Justification: Cleans UI, simplifies decision-making. Report Info: Budget (hypothetical) -> Goal: Inform -> Viz: Doughnut Chart -> Interaction: Hover for tooltips -> Justification: Provides a quick, high-level financial overview -> Library: Chart.js/Canvas. All location links are made interactive. This structure makes a text-heavy itinerary scannable and engaging. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
@@ -273,7 +269,8 @@
             const dayData = itineraryData[dayKey];
             const section = document.createElement('section');
             section.id = dayKey;
-            section.className = "scroll-mt-32 mb-12";
+            // Add a common class for selection and hide all day sections by default
+            section.className = "day-section scroll-mt-32 mb-12 hidden";
             
             let eventsHtml = '';
             dayData.events.forEach((event, index) => {
@@ -286,13 +283,13 @@
                         return `<div id="${dayKey}-event${index}-option${i}" class="option-content ${i > 0 ? 'hidden' : ''} mt-4 p-4 bg-[#F4F1DE]/60 rounded-lg">
                                     <h5 class="font-semibold">${option.name}</h5>
                                     ${option.note ? `<p class="text-sm text-gray-600 mt-1">${option.note}</p>` : ''}
-                                    ${option.link ? `<a href="${option.link}" target="_blank" class="text-sm text-[#E07A5F] hover:underline mt-2 inline-block">查看詳情 &rarr;</a>` : ''}
+                                    ${option.link ? `<a href="${option.link}" target="_blank" class="text-sm text-[#E07A5F] hover:underline mt-2 inline-block">查看詳情 →</a>` : ''}
                                 </div>`;
                     }).join('');
                     optionsHtml = `<div class="mt-4">
-                                     <div class="flex flex-wrap gap-2">${tabsHtml}</div>
-                                     <div>${contentsHtml}</div>
-                                 </div>`;
+                                        <div class="flex flex-wrap gap-2">${tabsHtml}</div>
+                                        <div>${contentsHtml}</div>
+                                    </div>`;
                 }
                 
                 eventsHtml += `
@@ -317,48 +314,65 @@
             itineraryContainer.appendChild(section);
         });
 
+        // Event listener for inner option tabs (unchanged)
         itineraryContainer.addEventListener('click', function(e) {
             if (e.target.classList.contains('option-tab')) {
                 const targetId = e.target.dataset.target;
-                
                 const parent = e.target.closest('.timeline-item');
                 parent.querySelectorAll('.option-tab').forEach(tab => tab.classList.remove('active'));
                 e.target.classList.add('active');
-
                 parent.querySelectorAll('.option-content').forEach(content => content.classList.add('hidden'));
                 document.getElementById(targetId).classList.remove('hidden');
             }
         });
         
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
+        // --- LOGIC FOR MAIN DAY TABS ---
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href').substring(1) === entry.target.id) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }, { rootMargin: "-50% 0px -50% 0px" });
-
-        sections.forEach(section => {
-            observer.observe(section);
+        // Select all main navigation links from both nav bars
+        const mainNavLinks = document.querySelectorAll('header .nav-link, nav.md\\:hidden .nav-link');
+        
+        // ** MODIFIED START **
+        // Show the '總覽' (Overview) section and set its nav link to active by default
+        document.getElementById('overview').classList.remove('hidden');
+        mainNavLinks.forEach(link => {
+            if (link.getAttribute('href') === '#overview') {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
         });
+        // ** MODIFIED END **
 
-        navLinks.forEach(link => {
+        // Add click listener for main day navigation to switch tabs
+        mainNavLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                document.querySelector(link.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (!targetSection) return;
+
+                // Hide all main sections (overview and all day-sections)
+                document.querySelectorAll('#overview, .day-section').forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // Show the clicked section
+                targetSection.classList.remove('hidden');
+
+                // Update active state for all nav links (both mobile and desktop)
+                const targetHref = link.getAttribute('href');
+                mainNavLinks.forEach(navLink => {
+                    if (navLink.getAttribute('href') === targetHref) {
+                        navLink.classList.add('active');
+                    } else {
+                        navLink.classList.remove('active');
+                    }
                 });
             });
         });
-        
+
+        // Chart.js logic (unchanged)
         const ctx = document.getElementById('budgetChart').getContext('2d');
         const budgetChart = new Chart(ctx, {
             type: 'doughnut',
@@ -367,13 +381,7 @@
                 datasets: [{
                     label: '預算分配',
                     data: [35000, 25000, 20000, 15000, 10000],
-                    backgroundColor: [
-                        '#3D405B',
-                        '#81B29A',
-                        '#E07A5F',
-                        '#F2CC8F',
-                        '#F4F1DE'
-                    ],
+                    backgroundColor: ['#3D405B', '#81B29A', '#E07A5F', '#F2CC8F', '#F4F1DE'],
                     borderColor: '#F8F7F4',
                     borderWidth: 4,
                     hoverOffset: 10
@@ -385,19 +393,13 @@
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: {
-                            font: {
-                                family: "'Inter', 'Noto Sans TC', sans-serif"
-                            }
-                        }
+                        labels: { font: { family: "'Inter', 'Noto Sans TC', sans-serif" } }
                     },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
                                 let label = context.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
+                                if (label) { label += ': '; }
                                 if (context.parsed !== null) {
                                     label += new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(context.parsed);
                                 }
@@ -409,8 +411,6 @@
                 cutout: '60%'
             }
         });
-
     </script>
 </body>
 </html>
-
