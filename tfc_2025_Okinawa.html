@@ -96,7 +96,7 @@
             <div class="flex justify-between items-center py-4">
                 <div class="flex flex-col">
                     <h1 class="text-2xl md:text-3xl font-bold text-[#3D405B]">TFC 13Y 沖繩之旅</h1>
-                    <p class="text-sm text-gray-500">四天三夜，十人同行，一場難忘的冒險</p>
+                    <p class="text-sm text-gray-500">四天三夜，十人同行，一場難忘的旅遊</p>
                 </div>
                 <nav class="hidden md:flex space-x-8">
                     <a href="#overview" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">總覽</a>
@@ -206,7 +206,7 @@
                 events: [
                     { time: "06:50 - 09:20", title: "出發", icon: "✈️", description: "桃園機場 → 抵達沖繩那霸機場", notes: "記得檢查護照與機票！ 需要託運的有：冠聞、韋智、1+、朱朱。" },
                     { time: "09:30 - 11:30", title: "機場手續 & 租車", icon: "🚗", description: "領取行李、租車。", notes: "沖繩OTS租車 (10/23 10:00~10/26 14:00)，文宇已預訂。" },
-                    { time: "11:30 - 14:00", title: "午餐 & 交通", icon: "🍽️", description: "前往系滿魚市場享用早餐，隨後驅車前往沖繩北部享用蝦蝦飯。", notes: "車程約 1 小時 10 分鐘。早午餐：系滿魚市場/蝦蝦飯。<br><a href='https://hanblog.tw/itoman-fish-center/' target='_blank' class='text-[#E07A5F] hover:underline'>系滿魚市場介紹</a><br><a href='https://bobbyfun.tw/2023-04-30-2328/' target='_blank' class='text-[#E07A5F] hover:underline'>蝦蝦飯介紹</a>" },
+                    { time: "11:30 - 14:00", title: "午餐 & 交通", icon: "🍤", description: "前往系滿魚市場享用早餐，隨後驅車前往沖繩北部享用蝦蝦飯。", notes: "車程約 1 小時 10 分鐘。早午餐：系滿魚市場/蝦蝦飯。<br><a href='https://hanblog.tw/itoman-fish-center/' target='_blank' class='text-[#E07A5F] hover:underline'>系滿魚市場介紹</a><br><a href='https://bobbyfun.tw/2023-04-30-2328/' target='_blank' class='text-[#E07A5F] hover:underline'>蝦蝦飯介紹</a>" },
                     { 
                         time: "14:00 - 17:00", title: "北部景點遊覽", icon: "🏞️", description: "有多個景點，請點選下方按鈕查看。", 
                         options: {
@@ -215,9 +215,9 @@
                             'FIFI PARLOR': { name: "下午茶 FIFI PARLOR", link: "https://slowlifeinokinawa.com/okicafe-fifiparlor/", note: "海景咖啡店" }
                         } 
                     },
-                    { time: "19:00 - 20:00", title: "晚餐", icon: "🥘", description: "うちなー食道 鳴声以外", notes: "阿古豬火鍋/豬排等特色料理。<br><a href='https://www.tripadvisor.jp/Restaurant_Review-g1120808-d14138848-Reviews-Uchina_Shokudo_Nakigoe_Igai-Motobu_cho_Kunigami_gun_Okinawa_Prefecture_Kyushu.html' target='_blank' class='text-[#E07A5F] hover:underline'>鳴声以外介紹</a><br>" },
+                    { time: "19:00 - 20:00", title: "晚餐", icon: "🐖", description: "うちなー食道 鳴声以外", notes: "阿古豬火鍋/豬排等特色料理。<br><a href='https://www.tripadvisor.jp/Restaurant_Review-g1120808-d14138848-Reviews-Uchina_Shokudo_Nakigoe_Igai-Motobu_cho_Kunigami_gun_Okinawa_Prefecture_Kyushu.html' target='_blank' class='text-[#E07A5F] hover:underline'>鳴声以外介紹</a><br>" },
                     { 
-                        time: "19:00 -", title: "入住 & 自由時間", icon: "🏨", description: "入住飯店後為自由時間。", 
+                        time: "After 20:00", title: "入住 & 自由時間", icon: "🏨", description: "入住飯店後為自由時間。", 
                         options: {
                             'Four Season': { name: "Four Season Resort Kouri Island", link: "https://www.agoda.com/zh-hk/l/hotel/iheya-jp.html?checkIn=2025-10-23&los=1&Rooms=1&Adults=10&Childs=0&currency=TWD&origin=TW&cid=1922876", note: "10/18前可免費取消。" },
                             'Mon Refuge': { name: "Mon Refuge Prive", link: "https://www.booking.com/hotel/jp/mon-refuge-prive-si-noyin-rejia.zh-tw.html?aid=2311236", note: "靠近水族館，10/9前可免費取消。" }
@@ -283,7 +283,7 @@
                     const tabsHtml = optionKeys.map((key, i) => `<button class="option-tab ${i === 0 ? 'active' : ''}" data-target="${dayKey}-event${index}-option${i}">${key}</button>`).join('');
                     const contentsHtml = optionKeys.map((key, i) => {
                         const option = event.options[key];
-                        return `<div id="${dayKey}-event${index}-option${i}" class="option-content ${i > 0 ? 'hidden' : ''} mt-4 p-4 bg-gray-50 rounded-lg">
+                        return `<div id="${dayKey}-event${index}-option${i}" class="option-content ${i > 0 ? 'hidden' : ''} mt-4 p-4 bg-[#F4F1DE]/60 rounded-lg">
                                     <h5 class="font-semibold">${option.name}</h5>
                                     ${option.note ? `<p class="text-sm text-gray-600 mt-1">${option.note}</p>` : ''}
                                     ${option.link ? `<a href="${option.link}" target="_blank" class="text-sm text-[#E07A5F] hover:underline mt-2 inline-block">查看詳情 &rarr;</a>` : ''}
