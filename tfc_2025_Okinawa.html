@@ -292,8 +292,13 @@
                                     </div>`;
                 }
                 
+                // ** MODIFIED START: Increased left padding for mobile view **
                 eventsHtml += `
-                    <div class="timeline-item relative pl-6 sm:pl-8 pb-8">
+                    <div class="timeline-item relative pl-8 pb-8"> 
+                `;
+                // ** MODIFIED END **
+                
+                eventsHtml += `
                         <div class="timeline-icon text-base sm:text-xl">${event.icon}</div>
                         <p class="text-sm font-medium text-[#E07A5F]">${event.time}</p>
                         <h4 class="text-lg sm:text-xl font-bold mt-1 text-[#3D405B]">${event.title}</h4>
@@ -331,7 +336,6 @@
         // Select all main navigation links from both nav bars
         const mainNavLinks = document.querySelectorAll('header .nav-link, nav.md\\:hidden .nav-link');
         
-        // ** MODIFIED START **
         // Show the '總覽' (Overview) section and set its nav link to active by default
         document.getElementById('overview').classList.remove('hidden');
         mainNavLinks.forEach(link => {
@@ -341,7 +345,6 @@
                 link.classList.remove('active');
             }
         });
-        // ** MODIFIED END **
 
         // Add click listener for main day navigation to switch tabs
         mainNavLinks.forEach(link => {
