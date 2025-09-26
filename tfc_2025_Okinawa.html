@@ -269,7 +269,6 @@
             const dayData = itineraryData[dayKey];
             const section = document.createElement('section');
             section.id = dayKey;
-            // Add a common class for selection and hide all day sections by default
             section.className = "day-section scroll-mt-32 mb-12 hidden";
             
             let eventsHtml = '';
@@ -292,13 +291,8 @@
                                     </div>`;
                 }
                 
-                // ** MODIFIED START: Increased left padding for mobile view **
                 eventsHtml += `
-                    <div class="timeline-item relative pl-8 pb-8"> 
-                `;
-                // ** MODIFIED END **
-                
-                eventsHtml += `
+                    <div class="timeline-item relative pl-8 pb-8">
                         <div class="timeline-icon text-base sm:text-xl">${event.icon}</div>
                         <p class="text-sm font-medium text-[#E07A5F]">${event.time}</p>
                         <h4 class="text-lg sm:text-xl font-bold mt-1 text-[#3D405B]">${event.title}</h4>
@@ -309,13 +303,15 @@
                 `;
             });
 
+            // ** MODIFIED START: Added padding to the timeline container on mobile **
             section.innerHTML = `
                 <div class="flex items-baseline mb-6">
                      <h2 class="text-2xl sm:text-3xl font-bold text-[#E07A5F] mr-4">Day ${dayKey.slice(-1)}</h2>
                      <p class="text-lg sm:text-xl font-medium text-gray-500">${dayData.date} - ${dayData.title}</p>
                 </div>
-                <div class="relative">${eventsHtml}</div>
+                <div class="relative pl-4 sm:pl-0">${eventsHtml}</div>
             `;
+            // ** MODIFIED END **
             itineraryContainer.appendChild(section);
         });
 
