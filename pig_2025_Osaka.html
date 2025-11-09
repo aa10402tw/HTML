@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小豬出遊 - 大阪行程總覽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 移除了 Chart.js，因為新行程中沒有預算圖表數據 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #F8F7F4;
+            color: #3D405B;
+        }
+        .nav-link {
+            transition: all 0.3s;
+        }
+        .nav-link.active {
+            color: #E07A5F;
+            border-bottom: 2px solid #E07A5F;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: -0.8rem; /* Mobile */
+            width: 2px;
+            height: calc(100% - 1rem);
+            background-color: #81B29A;
+        }
+        .timeline-icon {
+            position: absolute;
+            left: -1.5rem; /* Mobile */
+            top: 1.5rem;
+            width: 2rem; /* Mobile */
+            height: 2rem; /* Mobile */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #81B29A;
+            color: white;
+            z-index: 10;
+        }
+        .option-tab {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .option-tab.active {
+            background-color: #81B29A;
+            color: white;
+            border-color: #81B29A;
+        }
+        .option-tab:not(.active) {
+             background-color: #F4F1DE;
+             color: #3D405B;
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .timeline-item::before {
+                left: -1.05rem;
+            }
+            .timeline-icon {
+                left: -2rem;
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex flex-col">
+                    <!-- 標題已更新 -->
+                    <h1 class="text-2xl md:text-3xl font-bold text-[#3D405B]">小豬出遊 - 大阪之旅</h1>
+                    <p class="text-sm text-gray-500">2024/12/10 - 12/18，九天八夜，兩人同行</p>
+                </div>
+                <!-- 導覽列已更新為 9 天 -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#overview" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">總覽</a>
+                    <a href="#day1" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 1</a>
+                    <a href="#day2" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 2</a>
+                    <a href="#day3" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 3</a>
+                    <a href="#day4" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 4</a>
+                    <a href="#day5" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 5</a>
+                    <a href="#day6" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 6</a>
+                    <a href="#day7" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 7</a>
+                    <a href="#day8" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 8</a>
+                    <a href="#day9" class="nav-link text-lg font-medium text-gray-600 hover:text-[#E07A5F] pb-1">Day 9</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 行動裝置導覽列已更新為 9 天 -->
+    <nav class="md:hidden bg-white/80 backdrop-blur-lg shadow-sm sticky top-[76px] z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-around py-2 overflow-x-auto">
+                <a href="#overview" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F] px-1">總覽</a>
+                <a href="#day1" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F] px-1">Day 1</a>
+                <a href="#day2" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F] px-1">Day 2</a>
+                <a href="#day3" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F] px-1">Day 3</a>
+                <a href="#day4" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F] px-1">Day 4</a>
+                <a href="#day5" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F] px-1">Day 5</a>
+                <a href="#day6" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F] px-1">Day 6</a>
+                <a href="#day7" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F] px-1">Day 7</a>
+                <a href="#day8" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F] px-1">Day 8</a>
+                <a href="#day9" class="nav-link text-sm font-medium text-gray-600 hover:text-[#E07A5F] px-1">Day 9</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- 總覽頁面已根據您的文件更新 -->
+        <section id="overview" class="scroll-mt-32 mb-16">
+            <h2 class="text-2xl sm:text-3xl font-bold text-[#E07A5F] border-b-2 border-[#F2CC8F] pb-2 mb-6">行程總覽</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-[#3D405B]">重要資訊</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-4">✈️</span>
+                            <div>
+                                <h4 class="font-semibold">航班資訊 (捷星日本)</h4>
+                                <p class="text-gray-600">桃園 (TPE) ⇄ 大阪關西 (KIX)</p>
+                                <p class="text-sm text-gray-500">12/10 出發 (GK054): 18:10 - 21:40</p>
+                                <p class="text-sm text-gray-500">12/18 返程 (GK055): 14:50 - 17:10</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start">
+                            <span class="text-2xl mr-4">🚄</span>
+                            <div>
+                                <h4 class="font-semibold">機場交通</h4>
+                                <p class="text-gray-600">關西機場 → 天王寺: JR特急HARUKA (約35分)</p>
+                                <p class="text-sm text-gray-500">大阪站 → 關西機場: JR關空快速 (約65分)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-4">👥</span>
+                            <div>
+                                <h4 class="font-semibold">同行旅伴 (2人)</h4>
+                                <p class="text-gray-600">CHENKUAN WEN + 1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-[#3D405B]">行程概覽</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-4">🐙</span>
+                            <div>
+                                <h4 class="font-semibold">Day 1-4: 天王寺 & 難波</h4>
+                                <p class="text-gray-600">天王寺動物園、新世界、大阪城、黑門市場、道頓堀</p>
+                            </div>
+                        </div>
+                         <div class="flex items-start">
+                            <span class="text-2xl mr-4">🎢</span>
+                            <div>
+                                <h4 class="font-semibold">Day 5-6: 樂園之旅</h4>
+                                <p class="text-gray-600">大阪海遊館、日本環球影城 (USJ)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-4">⛩️</span>
+                            <div>
+                                <h4 class="font-semibold">Day 7: 京都一日遊</h4>
+                                <p class="text-gray-600">清水寺、伏見稻荷大社</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-4">🛍️</span>
+                            <div>
+                                <h4 class="font-semibold">Day 8-9: 梅田 & 歸途</h4>
+                                <p class="text-gray-600">梅田周邊、伴手禮採買、返程</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 行程容器，JS 將會在此填入每日行程 -->
+        <div id="itinerary"></div>
+
+    </main>
+    
+    <script>
+        // --- 數據 ---
+        // 這是從您的 Google Doc "行程"章節轉換而來的數據
+        const itineraryData = {
+            day1: {
+                title: "抵達大阪 & 入住天王寺",
+                date: "12/10 (週三)",
+                events: [
+                    { time: "18:10 - 21:40", title: "出發", icon: "✈️", description: "台北 (TPE) → 大阪 (KIX)", notes: "航班：GK054 捷星日本" },
+                    { time: "22:00 - 23:00", title: "機場交通", icon: "🚄", description: "搭乘 JR 特急 HARUKA 號前往天王寺", notes: "車程約 35 分鐘。<br>[kkdays 已訂購]" },
+                    { time: "23:00 - 23:59", title: "入住 & 宵夜", icon: "🏨", description: "入住：大阪恵美須飯店", notes: "宵夜: 飯店附近小吃或串燒" }
+                ]
+            },
+            day2: {
+                title: "天王寺深度遊",
+                date: "12/11 (週四)",
+                events: [
+                    { time: "12:30", title: "午餐: 大阪燒", icon: "🍳", description: "御好燒食大板燒 Abeton (天王寺附近)", notes: "[AutoReserve 已預定]" },
+                    { time: "下午", title: "天王寺景點", icon: "🏞️", description: "遊覽天王寺周邊", notes: "景點清單：<br>• 天王寺動物園<br>• 新世界商圈<br>• 天王寺公園<br>• 通天閣" },
+                    { time: "晚餐", title: "晚餐: 壽喜燒", icon: "🍲", description: "壽喜燒及時令食材 中谷", notes: "位於 JG 北新地站 (離天王寺 15-20 分鐘)。<br>[kkday 已預定]" }
+                ]
+            },
+            day3: {
+                title: "黑門市場 & 難波",
+                date: "12/12 (週五)",
+                events: [
+                    { time: "早午餐", title: "黑門市場", icon: "🍣", description: "在黑門市場享用早午餐" },
+                    { time: "下午", title: "景點", icon: "🏯", description: "難波八阪神社 & 大阪城 天守閣" },
+                    { time: "18:00?", title: "晚餐: 蟹道樂", icon: "🦀", description: "蟹道樂 (道顿堀)", notes: "[官網已預定, 待回覆]" },
+                    { time: "晚上", title: "道頓堀", icon: "🚤", description: "道頓堀水上觀光船", notes: "[kkday 已預定] (周遊卷似乎有包含?)" }
+                ]
+            },
+            day4: {
+                title: "難波 & 梅田",
+                date: "12/13 (週六)",
+                events: [
+                    { time: "中午", title: "午餐 & 甜點", icon: "🍫", description: "午餐附近吃吃。甜點：MELT chocolate 心齋橋熱巧克力" },
+                    { time: "17:45", title: "晚餐: 燒肉", icon: "🥩", description: "個室和牛燒肉吟 (難波站附近)", notes: "預約 17:45 (JST)。<br><a href='https://tabelog.com/tw/osaka/A2701/A270202/27060998/' target='_blank' class='text-[#E07A5F] hover:underline'>Tabelog 連結</a>" },
+                    { time: "晚上", title: "景點", icon: "♨️", description: "可選擇：道頓堀水上觀光船, 浮世繪館, 大阪空庭溫泉?" }
+                ]
+            },
+            day5: {
+                title: "環球影城 & 海遊館",
+                date: "12/14 (週日)",
+                events: [
+                    { time: "全日", title: "入住環球影城飯店", icon: "🏨", description: "入住：日本環球影城森格拉爾天空水療飯店 (CANDEO HOTELS)" },
+                    { time: "中午", title: "午餐", icon: "🍛", description: "午餐附近好吃。可逛大阪環球城市步行街", notes: "步行街參考：京都勝牛 (無法預定)" },
+                    { time: "下午", title: "大阪海遊館", icon: "🐳", description: "搭乘【船長線 Captain Line】往返環球港-海遊館西碼頭" },
+                    { time: "晚上", title: "晚餐", icon: "🍽️", description: "飯店或步行街晚餐" }
+                ]
+            },
+            day6: {
+                title: "環球影城 (USJ)!",
+                date: "12/15 (週一)",
+                events: [
+                    { time: "全日", title: "日本環球影城", icon: "🎢", description: "全日暢玩！", notes: "門票 [kkday 已訂購]。<br>快速通關 [Trip 已訂購]。<br><a href='https://bobbyfun.tw/2024-01-25-2809/' target='_blank' class='text-[#E07A5F] hover:underline'>攻略參考</a>" },
+                    { time: "12:20 - 13:20", title: "超級任天堂世界™", icon: "🍄", description: "園區入場 (12:20-13:20)", notes: "• 12:20-12:50: 瑪利歐賽車: 庫巴的挑戰書™<br>• 12:50-13:20: 礦車瘋狂" },
+                    { time: "...", title: "Jaws & Minecart", icon: "🦈", description: "快速通關包含 Minecart & JAWS Special" }
+                ]
+            },
+            day7: {
+                title: "京都一日遊",
+                date: "12/16 (週二)",
+                events: [
+                    { time: "早上", title: "移動 & 入住", icon: "🏨", description: "前往梅田, 入住：阪急大阪龍仕柏飯店" },
+                    { time: "全日", title: "京都一日遊", icon: "⛩️", description: "前往京都", 
+                      notes: "景點：<br>• 清水寺<br>• 伏見稻荷大社<br><a href='https://bobbyfun.tw/2024-03-08-3100/' target='_blank' class='text-[#E07A5F] hover:underline'>攻略參考</a>" }
+                ]
+            },
+            day8: {
+                title: "梅田 & 採買",
+                date: "12/17 (週三)",
+                events: [
+                    { time: "白天", title: "梅田 & 伴手禮", icon: "🛍️", description: "梅田附近玩，採買伴手禮" },
+                    { 
+                        time: "晚餐", title: "晚餐: 燒肉/鐵板燒", icon: "🥩", description: "晚餐選項 (未定)",
+                        options: {
+                            'Sublime': { name: "Namba Teppanyaki Sublime", note: "鐵板燒 (還不能預約)" },
+                            'Arata': { name: "熟成焼肉 あらた", note: "燒肉" },
+                            'Kitan': { name: "焼肉 きたん 法善寺", note: "燒肉" }
+                        }
+                    }
+                ]
+            },
+            day9: {
+                title: "返程",
+                date: "12/18 (週四)",
+                events: [
+                    { time: "早上", title: "飯店出發", icon: "🏨", description: "起床, 準備前往機場" },
+                    { time: "中午", title: "前往機場", icon: "🚄", description: "從大阪站搭乘 JR 關空快速前往關西機場", notes: "車程約 65 分鐘" },
+                    { time: "14:50 - 17:10", title: "返程", icon: "✈️", description: "大阪 (KIX) → 台北 (TPE)", notes: "航班：GK055 捷星日本" }
+                ]
+            }
+        };
+
+        // --- 渲染邏輯 (比照模板，無需修改) ---
+
+        const itineraryContainer = document.getElementById('itinerary');
+        // 迴圈遍歷 itineraryData 中的每一天
+        Object.keys(itineraryData).forEach(dayKey => {
+            const dayData = itineraryData[dayKey];
+            const section = document.createElement('section');
+            section.id = dayKey;
+            section.className = "day-section scroll-mt-32 mb-12 hidden"; // 預設隱藏
+            
+            let eventsHtml = '';
+            dayData.events.forEach((event, index) => {
+                let optionsHtml = '';
+                // 處理多選項 (如景點、餐廳)
+                if (event.options) {
+                    const optionKeys = Object.keys(event.options);
+                    const tabsHtml = optionKeys.map((key, i) => `<button class="option-tab ${i === 0 ? 'active' : ''}" data-target="${dayKey}-event${index}-option${i}">${event.options[key].name || key}</button>`).join('');
+                    const contentsHtml = optionKeys.map((key, i) => {
+                        const option = event.options[key];
+                        return `<div id="${dayKey}-event${index}-option${i}" class="option-content ${i > 0 ? 'hidden' : ''} mt-4 p-4 bg-[#F4F1DE]/60 rounded-lg">
+                                    <h5 class="font-semibold">${option.name || key}</h5>
+                                    ${option.note ? `<p class="text-sm text-gray-600 mt-1">${option.note}</p>` : ''}
+                                    ${option.link ? `<a href="${option.link}" target="_blank" class="text-sm text-[#E07A5F] hover:underline mt-2 inline-block">查看詳情 →</a>` : ''}
+                                </div>`;
+                    }).join('');
+                    optionsHtml = `<div class="mt-4">
+                                        <div class="flex flex-wrap gap-2">${tabsHtml}</div>
+                                        <div>${contentsHtml}</div>
+                                    </div>`;
+                }
+                
+                // 組合時間軸項目
+                eventsHtml += `
+                    <div class="timeline-item relative pl-8 pb-8">
+                        <div class="timeline-icon text-base sm:text-xl">${event.icon}</div>
+                        <p class="text-sm font-medium text-[#E07A5F]">${event.time}</p>
+                        <h4 class="text-lg sm:text-xl font-bold mt-1 text-[#3D405B]">${event.title}</h4>
+                        <p class="text-gray-700 mt-2">${event.description}</p>
+                        ${event.notes ? `<div class="mt-2 text-sm text-gray-500 bg-[#F4F1DE]/60 p-3 rounded-md">${event.notes}</div>` : ''}
+                        ${optionsHtml}
+                    </div>
+                `;
+            });
+
+            // 組合每日的 HTML
+            section.innerHTML = `
+                <div class="flex items-baseline mb-6">
+                     <h2 class="text-2xl sm:text-3xl font-bold text-[#E07A5F] mr-4">Day ${dayKey.slice(-1)}</h2>
+                     <p class="text-lg sm:text-xl font-medium text-gray-500">${dayData.date} - ${dayData.title}</p>
+                </div>
+                <div class="relative pl-4 sm:pl-0">${eventsHtml}</div>
+            `;
+            itineraryContainer.appendChild(section);
+        });
+
+        // 行程內的多選項分頁 (比照模板，無需修改)
+        itineraryContainer.addEventListener('click', function(e) {
+            if (e.target.classList.contains('option-tab')) {
+                const targetId = e.target.dataset.target;
+                const parent = e.target.closest('.timeline-item');
+                parent.querySelectorAll('.option-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                parent.querySelectorAll('.option-content').forEach(content => content.classList.add('hidden'));
+                document.getElementById(targetId).classList.remove('hidden');
+            }
+        });
+        
+        // --- 主導覽列分頁邏輯 (比照模板，無需修改) ---
+
+        // 選擇所有主導覽列連結 (包含電腦版和手機版)
+        const mainNavLinks = document.querySelectorAll('header .nav-link, nav.md\\:hidden .nav-link');
+        
+        // 預設顯示 '總覽' (Overview) 頁面
+        document.getElementById('overview').classList.remove('hidden');
+        mainNavLinks.forEach(link => {
+            if (link.getAttribute('href') === '#overview') {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        // 點擊主導覽列時切換顯示的區塊
+        mainNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (!targetSection) return;
+
+                // 隱藏所有主要區塊 (總覽 + 每日行程)
+                document.querySelectorAll('#overview, .day-section').forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // 顯示被點擊的目標區塊
+                targetSection.classList.remove('hidden');
+                
+                // 將瀏覽器捲動到該區塊頂部 (或導覽列下方)
+                // targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // 註：原模板使用 scroll-mt-32 處理錨點偏移，點擊跳轉已能正確定位，故無需 scrollIntoView
+
+                // 更新所有導覽列的 'active' 狀態
+                const targetHref = link.getAttribute('href');
+                mainNavLinks.forEach(navLink => {
+                    if (navLink.getAttribute('href') === targetHref) {
+                        navLink.classList.add('active');
+                    } else {
+                        navLink.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // 移除了原模板中的 Chart.js 邏輯
+    </script>
+</body>
+</html>
